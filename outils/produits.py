@@ -16,7 +16,7 @@ TAG = "tag=amrisimply49-21"
 MENTION = "As an Amazon Associate I earn from qualifying purchases"
 
 RE_BLOC = re.compile(r'(<div class="cards">)(.*?)(</div>\s*</section>)', re.S)
-RE_CARTE = re.compile(r'<article class="card">.*?</article>', re.S)
+RE_CARTE = re.compile(r'<article class="card[^"]*">.*?</article>', re.S)
 RE_POINTS = re.compile(r'<li><span class="lg-fr">(.*?)</span><span class="lg-nl">(.*?)</span></li>', re.S)
 RE_UL = re.compile(r'(<ul>)(.*?)(\s*</ul>)', re.S)
 
