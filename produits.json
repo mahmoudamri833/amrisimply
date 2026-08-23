@@ -1,0 +1,77 @@
+[
+  {
+    "badge_fr": "Le moins cher qui tient",
+    "badge_nl": "Goedkoopst dat standhoudt",
+    "marque": "Pagani Design",
+    "titre": "GMT Automatique",
+    "etoiles": "★★★★☆",
+    "note_avis": "4,1/5 · 1 175",
+    "argument_fr": "La porte d'entrée. Verre saphir synthétique et 100 m d'étanchéité à ce prix, c'est rare.",
+    "argument_nl": "De instapper. Synthetisch saffierglas en 100 m waterdicht voor die prijs is zeldzaam.",
+    "prix_niveau": "&euro;",
+    "prix_reste": "&euro;&euro;",
+    "palier_fr": "Entrée de gamme",
+    "palier_nl": "Instapmodel",
+    "lien": "https://www.amazon.com.be/dp/B0B639TSKY?tag=amrisimply49-21",
+    "points_fr": [
+      "Mouvement mécanique automatique",
+      "Verre saphir synthétique",
+      "Étanche 100 m · acier inoxydable"
+    ],
+    "points_nl": [
+      "Mechanisch automatisch uurwerk",
+      "Synthetisch saffierglas",
+      "100 m waterdicht · roestvrij staal"
+    ]
+  },
+  {
+    "badge_fr": "Le choix sûr",
+    "badge_nl": "De veilige keuze",
+    "marque": "Orient",
+    "titre": "Bambino Ver. 2",
+    "etoiles": "★★★★★",
+    "note_avis": "4,7/5 · 4 433",
+    "argument_fr": "La montre qu'on conseille depuis dix ans à qui achète sa première automatique. 4 433 avis, et elle tient toujours.",
+    "argument_nl": "Het horloge dat men al tien jaar aanraadt aan wie zijn eerste automaat koopt. 4.433 reviews, en het houdt nog steeds stand.",
+    "prix_niveau": "&euro;&euro;",
+    "prix_reste": "&euro;",
+    "palier_fr": "Milieu de gamme",
+    "palier_nl": "Middenklasse",
+    "lien": "https://www.amazon.com.be/dp/B01N45HWRM?tag=amrisimply49-21",
+    "points_fr": [
+      "Automatique japonaise Orient",
+      "Boîtier acier, bracelet cuir",
+      "Cadran bombé, style habillé"
+    ],
+    "points_nl": [
+      "Japans automatisch uurwerk Orient",
+      "Stalen kast, leren band",
+      "Gewelfde wijzerplaat, klassieke stijl"
+    ]
+  },
+  {
+    "badge_fr": "Le plongeur",
+    "badge_nl": "De duiker",
+    "marque": "Orient",
+    "titre": "Kamasu / Mako III",
+    "etoiles": "★★★★★",
+    "note_avis": "4,7/5 · 1 302",
+    "argument_fr": "Verre saphir et couronne vissée. C'est la vraie montre de plongée du lot, pas un look de plongeuse.",
+    "argument_nl": "Saffierglas en geschroefde kroon. Dit is de échte duikhorloge van de drie, geen duikers-look.",
+    "prix_niveau": "&euro;&euro;&euro;",
+    "prix_reste": null,
+    "palier_fr": "Haut du panier",
+    "palier_nl": "Topmodel",
+    "lien": "https://www.amazon.com.be/dp/B07JGNC1C5?tag=amrisimply49-21",
+    "points_fr": [
+      "Automatique, remontage manuel possible",
+      "Verre saphir · couronne vissée",
+      "Acier ou silicone au choix"
+    ],
+    "points_nl": [
+      "Automatisch, handopwinding mogelijk",
+      "Saffierglas · geschroefde kroon",
+      "Staal of siliconen naar keuze"
+    ]
+  }
+]
