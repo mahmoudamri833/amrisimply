@@ -1,0 +1,78 @@
+name: Surveillance amrisimply.com
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # tous les lundis 06:00 UTC (08:00 Bruxelles)
+  workflow_dispatch:      # bouton "Run workflow" pour lancer a la main
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verifier le site et les liens affilies
+        run: |
+          python3 - <<'PY'
+          import urllib.request, re, sys
+
+          URL = "https://amrisimply.com/"
+          TAG = "amrisimply49-21"
+          ASINS = ["B0B639TSKY", "B01N45HWRM", "B07JGNC1C5",
+                   "B0BK11GP16", "B08CGQW8WD", "B0979HNLJJ"]
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases"
+
+          problemes = []
+          req = urllib.request.Request(URL, headers={"User-Agent": "amrisimply-monitor"})
+          try:
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  code, html = r.getcode(), r.read().decode("utf-8", "replace")
+          except Exception as e:
+              print(f"::error::Site injoignable : {e}")
+              sys.exit(1)
+
+          print(f"HTTP {code} - {len(html)} octets")
+          if code != 200:
+              problemes.append(f"Le site repond HTTP {code} au lieu de 200.")
+          if len(html) < 20000:
+              problemes.append(f"Page anormalement courte ({len(html)} octets) - deploiement casse ?")
+
+          liens = re.findall(r'href="(https://www\.amazon\.com\.be/[^"]+)"', html)
+          print(f"{len(liens)} liens Amazon trouves")
+
+          for asin in ASINS:
+              trouves = [l for l in liens if asin in l]
+              if not trouves:
+                  problemes.append(f"Lien produit disparu de la page : {asin}")
+              for l in trouves:
+                  if f"tag={TAG}" not in l:
+                      problemes.append(f"Tag affilie absent sur {asin} -> {l}")
+
+          if DISCLOSURE not in html:
+              problemes.append("Mention obligatoire Amazon Associates absente de la page.")
+          if "impact-site-verification" not in html:
+              problemes.append("Balise impact-site-verification absente (snippet Netlify supprime ?).")
+
+          if problemes:
+              rapport = "\n".join(f"- {p}" for p in problemes)
+              open("rapport.txt", "w", encoding="utf-8").write(rapport)
+              print("::error::Problemes detectes")
+              print(rapport)
+              sys.exit(1)
+
+          print("OK : site en ligne, 6 liens produits presents, tag affilie et mentions en place.")
+          PY
+
+      - name: Ouvrir une alerte si probleme
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "La surveillance automatique de https://amrisimply.com a echoue le $(date -u '+%d/%m/%Y a %H:%M UTC')." > corps.md
+          echo "" >> corps.md
+          if [ -f rapport.txt ]; then cat rapport.txt >> corps.md; else echo "- Site injoignable ou erreur reseau (voir le journal du run)." >> corps.md; fi
+          echo "" >> corps.md
+          echo "Journal complet : $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> corps.md
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "Alerte amrisimply.com - $(date -u '+%d/%m/%Y')" --body-file corps.md
