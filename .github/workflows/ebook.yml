@@ -1,0 +1,147 @@
+name: Fabriquer le livre (EPUB, DOCX, PDF)
+
+on:
+  push:
+    paths:
+      - 'livre/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fabriquer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Creer le squelette du livre si absent
+        run: |
+          if [ -d livre ]; then
+            echo "Le dossier livre/ existe deja, rien a creer."
+            exit 0
+          fi
+          echo "Premiere execution : creation du squelette du livre."
+          mkdir -p livre
+          cat > livre/metadata.yml <<'FIN_DE_FICHIER'
+          ---
+          title: "Bien choisir sa premiere montre automatique"
+          subtitle: "Guide pratique pour la Belgique"
+          author: "amrisimply"
+          lang: fr-BE
+          date: "2026"
+          rights: "© 2026 amrisimply — tous droits reserves"
+          publisher: "amrisimply"
+          description: "Guide d achat independant sur les montres automatiques : mecanisme, budget, criteres, entretien."
+          ...
+          FIN_DE_FICHIER
+
+          cat > livre/style.css <<'FIN_DE_FICHIER'
+          @page { size: A5; margin: 18mm 16mm; }
+          body { font-family: Georgia, "Times New Roman", serif; font-size: 11pt; line-height: 1.55; color: #14171c; }
+          h1 { font-size: 20pt; margin-top: 2em; page-break-before: always; }
+          h1:first-of-type { page-break-before: avoid; }
+          h2 { font-size: 14pt; margin-top: 1.6em; }
+          blockquote { color: #6b7280; border-left: 3px solid #FF6152; padding-left: 12px; font-style: italic; }
+          a { color: #b03a2f; }
+          #TOC { page-break-after: always; }
+          FIN_DE_FICHIER
+
+          cat > livre/00-introduction.md <<'FIN_DE_FICHIER'
+          # Introduction
+
+          > REMPLACER CE TEXTE. Ce fichier est un squelette : chaque bloc entre chevrons
+          > indique quoi ecrire. Rien ici n'est du contenu definitif.
+
+          > A ecrire : a qui s'adresse ce guide, ce que le lecteur saura faire a la fin,
+          > et pourquoi tu es legitime pour l'ecrire (ton experience reelle, sans rien inventer).
+
+          FIN_DE_FICHIER
+
+          cat > livre/01-comprendre.md <<'FIN_DE_FICHIER'
+          # Comprendre le mecanisme automatique
+
+          > A ecrire : difference quartz / mecanique / automatique, en langage simple.
+
+          ## Ce qui fait le prix d une montre
+
+          > A ecrire : mouvement, finitions, marque, provenance.
+
+          FIN_DE_FICHIER
+
+          cat > livre/02-criteres.md <<'FIN_DE_FICHIER'
+          # Les criteres qui comptent vraiment
+
+          > A ecrire : diametre, epaisseur, etancheite, verre, bracelet, reserve de marche.
+
+          ## Les pieges frequents
+
+          > A ecrire : fausses annonces, contrefacons, "revisions" hors de prix.
+
+          FIN_DE_FICHIER
+
+          cat > livre/03-selection.md <<'FIN_DE_FICHIER'
+          # Ma selection
+
+          > A ecrire : les modeles que tu recommandes et POURQUOI (criteres ci-dessus).
+          > Regle Amazon Partenaires : ne pas afficher de prix dans un contenu telechargeable,
+          > et indiquer clairement que les liens sont remuneres.
+
+          *En tant que Partenaire Amazon, je realise un benefice sur les achats remplissant les conditions requises.*
+
+          FIN_DE_FICHIER
+
+          cat > livre/04-entretien.md <<'FIN_DE_FICHIER'
+          # Entretien et duree de vie
+
+          > A ecrire : remontage, rangement, magnetisme, revision, ce qui tue une montre.
+
+          FIN_DE_FICHIER
+
+          cat > livre/99-conclusion.md <<'FIN_DE_FICHIER'
+          # Pour aller plus loin
+
+          > A ecrire : rappel de la promesse, invitation a suivre le site et les reseaux.
+
+          Site : https://amrisimply.com
+
+          FIN_DE_FICHIER
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add livre
+          git commit -m "Squelette du livre cree automatiquement"
+          git push
+          echo "Squelette cree et enregistre dans le depot."
+
+      - name: Installer pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Assembler les chapitres
+        run: |
+          cd livre
+          CHAPITRES=$(ls *.md | sort | tr '\n' ' ')
+          echo "Chapitres : $CHAPITRES"
+          COUVERTURE=""
+          if [ -f couverture.jpg ]; then COUVERTURE="--epub-cover-image=couverture.jpg"; fi
+          if [ -f couverture.png ]; then COUVERTURE="--epub-cover-image=couverture.png"; fi
+          pandoc metadata.yml $CHAPITRES --toc --toc-depth=2 $COUVERTURE -o ../amrisimply-livre.epub
+          pandoc metadata.yml $CHAPITRES --toc --toc-depth=2 -o ../amrisimply-livre.docx
+          pandoc metadata.yml $CHAPITRES -s --toc --toc-depth=2 -c style.css -o livre.html
+
+      - name: Imprimer le PDF
+        run: |
+          google-chrome --headless --disable-gpu --no-sandbox --no-pdf-header-footer --print-to-pdf=amrisimply-livre.pdf "file://$PWD/livre/livre.html"
+          ls -lh amrisimply-livre.epub amrisimply-livre.docx amrisimply-livre.pdf
+
+      - name: Publier les fichiers telechargeables
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NOTE="Fichiers generes automatiquement le $(date -u '+%d/%m/%Y a %H:%M UTC') a partir du dossier livre/. EPUB et DOCX pour Amazon KDP, PDF pour la vente directe ou l aimant a emails."
+          if gh release view livre --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload livre amrisimply-livre.epub amrisimply-livre.docx amrisimply-livre.pdf --repo "$GITHUB_REPOSITORY" --clobber
+            gh release edit livre --repo "$GITHUB_REPOSITORY" --notes "$NOTE"
+          else
+            gh release create livre amrisimply-livre.epub amrisimply-livre.docx amrisimply-livre.pdf --repo "$GITHUB_REPOSITORY" --title "Derniere version du livre" --notes "$NOTE"
+          fi
