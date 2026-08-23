@@ -1,0 +1,8 @@
+@page { size: A5; margin: 18mm 16mm; }
+body { font-family: Georgia, "Times New Roman", serif; font-size: 11pt; line-height: 1.55; color: #14171c; }
+h1 { font-size: 20pt; margin-top: 2em; page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+h2 { font-size: 14pt; margin-top: 1.6em; }
+blockquote { color: #6b7280; border-left: 3px solid #FF6152; padding-left: 12px; font-style: italic; }
+a { color: #b03a2f; }
+#TOC { page-break-after: always; }
