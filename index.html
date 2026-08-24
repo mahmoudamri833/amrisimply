@@ -256,7 +256,25 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   .sec{padding:48px 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* --- guides : liens vers les pages de contenu --- */
+.guides{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px}
+@media(max-width:760px){.guides{grid-template-columns:1fr}}
+.guide{
+  display:block;text-decoration:none;background:var(--surface);
+  border:1px solid var(--rule);border-radius:12px;padding:22px 24px;
+  box-shadow:var(--shadow);transition:border-color .15s ease;
+}
+.guide:hover{border-color:var(--red)}
+.guide .k{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--red);
+  display:block;margin-bottom:9px;font-weight:500;
+}
+.guide h3{font-size:18px;font-weight:800;color:var(--ink);margin:0 0 7px;line-height:1.25}
+.guide p{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.5}
 </style>
+</head>
 <body>
 <div id="page" data-lang="fr">
 
@@ -506,6 +524,39 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
     </div>
   </div>
 </section>
+
+<!-- GUIDES -->
+<section class="sec">
+  <h2><span class="lg-fr">Les guides, pour choisir en connaissance de cause</span><span class="lg-nl">De gidsen, om met kennis van zaken te kiezen</span></h2>
+  <p class="lead"><span class="lg-fr">Quatre pages qui répondent aux questions qu'on se pose avant d'acheter. Défauts compris.</span><span class="lg-nl">Vier pagina's die de vragen beantwoorden die je je stelt voor de aankoop. Gebreken inbegrepen.</span></p>
+
+  <div class="guides">
+    <a class="guide" href="/automatique-ou-quartz/">
+      <span class="k"><span class="lg-fr">Avant de choisir</span><span class="lg-nl">Voor je kiest</span></span>
+      <h3><span class="lg-fr">Automatique ou quartz ?</span><span class="lg-nl">Automatisch of quartz?</span></h3>
+      <p><span class="lg-fr">Précision, entretien, durée de vie. Ce qui dérange dans l'automatique, et pourquoi le quartz est parfois le bon choix.</span><span class="lg-nl">Nauwkeurigheid, onderhoud, levensduur. Wat stoort aan een automaat, en waarom quartz soms de juiste keuze is.</span></p>
+    </a>
+
+    <a class="guide" href="/montre-automatique-moins-200-euros/">
+      <span class="k"><span class="lg-fr">Budget serré</span><span class="lg-nl">Krap budget</span></span>
+      <h3><span class="lg-fr">Moins de 200 € : ce qui tient</span><span class="lg-nl">Onder 200 €: wat standhoudt</span></h3>
+      <p><span class="lg-fr">Ce que ce budget achète vraiment, et les quatre choses à refuser absolument sur une fiche produit.</span><span class="lg-nl">Wat dit budget echt koopt, en de vier dingen die je absoluut moet weigeren.</span></p>
+    </a>
+
+    <a class="guide" href="/bambino-ou-kamasu/">
+      <span class="k"><span class="lg-fr">Comparatif</span><span class="lg-nl">Vergelijking</span></span>
+      <h3><span class="lg-fr">Bambino ou Kamasu ?</span><span class="lg-nl">Bambino of Kamasu?</span></h3>
+      <p><span class="lg-fr">Les deux Orient face à face : verre, étanchéité, diamètre, style. Et les défauts de chacune.</span><span class="lg-nl">De twee Orients tegenover elkaar: glas, waterdichtheid, diameter, stijl. En de gebreken van elk.</span></p>
+    </a>
+
+    <a class="guide" href="/methode/">
+      <span class="k"><span class="lg-fr">Transparence</span><span class="lg-nl">Transparantie</span></span>
+      <h3><span class="lg-fr">Ma méthode</span><span class="lg-nl">Mijn methode</span></h3>
+      <p><span class="lg-fr">Mes cinq filtres, ce que je ne peux pas savoir, et comment ce site est rémunéré.</span><span class="lg-nl">Mijn vijf filters, wat ik niet kan weten, en hoe deze site wordt vergoed.</span></p>
+    </a>
+  </div>
+</section>
+
 
 <!-- ACCESSOIRES -->
 <section class="sec">
