@@ -30,6 +30,26 @@
     echo '--- Fichiers publies ---' && find _site -type f | sort
   """
 
+# Le site est aussi servi sur amrisimply.netlify.app, qui renvoie un 200 avec
+# un contenu identique. Le canonical limite le risque, mais Google peut
+# crawler et parfois indexer ce doublon. On force donc une redirection 301
+# permanente vers le domaine principal, pour toutes les URLs.
+#
+# force = true est indispensable : sans lui, Netlify sert le fichier statique
+# existant et n'applique jamais la redirection.
+
+[[redirects]]
+  from = "https://amrisimply.netlify.app/*"
+  to = "https://amrisimply.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://amrisimply.netlify.app/*"
+  to = "https://amrisimply.com/:splat"
+  status = 301
+  force = true
+
 # Cache long sur les fichiers statiques versionnes.
 [[headers]]
   for = "/assets/*"
