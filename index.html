@@ -22,6 +22,40 @@
 
 <meta name="robots" content="index, follow, max-image-preview:large">
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://amrisimply.com/#organisation",
+      "name":"amrisimply",
+      "url":"https://amrisimply.com/",
+      "founder":{"@type":"Person","name":"Mahmoud Amri"},
+      "areaServed":{"@type":"Country","name":"Belgique"},
+      "description":"Comparatifs de montres automatiques abordables, ecrits pour le marche belge."
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://amrisimply.com/#site",
+      "name":"amrisimply",
+      "url":"https://amrisimply.com/",
+      "inLanguage":["fr-BE","nl-BE"],
+      "publisher":{"@id":"https://amrisimply.com/#organisation"}
+    },
+    {
+      "@type":"CollectionPage",
+      "@id":"https://amrisimply.com/#accueil",
+      "url":"https://amrisimply.com/",
+      "name":"3 montres automatiques qui valent leur prix",
+      "isPartOf":{"@id":"https://amrisimply.com/#site"},
+      "about":{"@id":"https://amrisimply.com/#organisation"},
+      "inLanguage":"fr-BE"
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
