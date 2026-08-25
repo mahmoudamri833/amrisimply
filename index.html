@@ -718,6 +718,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
     <strong style="font-family:Anton,sans-serif;font-size:19px;text-transform:lowercase;letter-spacing:.02em">amri<span style="color:var(--red)">simply</span></strong>
     <a href="#" data-modal="legal"><span class="lg-fr">Mentions légales</span><span class="lg-nl">Juridische info</span></a>
     <a href="#" data-modal="privacy"><span class="lg-fr">Vie privée</span><span class="lg-nl">Privacy</span></a>
+    <a href="#" data-cookies><span class="lg-fr">Cookies</span><span class="lg-nl">Cookies</span></a>
     <a href="#" data-modal="contact">Contact</a>
     <a href="#apropos"><span class="lg-fr">Qui je suis</span><span class="lg-nl">Wie ik ben</span></a>
     <span style="margin-left:auto;color:var(--ink-3);font-size:13px">© 2026 amrisimply · Fontaine-l'Évêque, BE</span>
@@ -762,7 +763,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   <div class="modal" data-panel="privacy" hidden>
     <button class="mclose" type="button" aria-label="Fermer">&times;</button>
     <h3><span class="lg-fr">Vie privée</span><span class="lg-nl">Privacy</span></h3>
-    <p><span class="lg-fr">Version du 21 août 2026. Ce site collecte le strict minimum : une adresse e-mail, et uniquement si tu la donnes toi-même.</span><span class="lg-nl">Versie van 21 augustus 2026. Deze site verzamelt het strikte minimum: één e-mailadres, en enkel als je het zelf geeft.</span></p>
+    <p><span class="lg-fr">Version du 25 août 2026. Ce site collecte le strict minimum : une adresse e-mail si tu la donnes toi-même, et des statistiques de visite uniquement si tu les acceptes.</span><span class="lg-nl">Versie van 25 augustus 2026. Deze site verzamelt het strikte minimum: één e-mailadres als je het zelf geeft, en bezoekstatistieken enkel als je die aanvaardt.</span></p>
     <dl>
       <dt><span class="lg-fr">Responsable du traitement</span><span class="lg-nl">Verwerkingsverantwoordelijke</span></dt>
       <dd>Amri, Mahmoud — Rue des Gaulx 69, 6140 Fontaine-l'Évêque — <a href="mailto:amrisimplybusiness@hotmail.com">amrisimplybusiness@hotmail.com</a></dd>
@@ -778,7 +779,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
       <dd><span class="lg-fr">[à compléter avec le nom de l'outil d'e-mailing utilisé]. Aucune donnée n'est vendue ni échangée.</span><span class="lg-nl">[aan te vullen met de naam van de gebruikte e-mailtool]. Geen enkel gegeven wordt verkocht of geruild.</span></dd>
     </dl>
     <h4><span class="lg-fr">Cookies</span><span class="lg-nl">Cookies</span></h4>
-    <p><span class="lg-fr">Ce site ne dépose aucun cookie publicitaire ni aucun traceur. Il retient seulement, dans ton navigateur, si tu préfères le français ou le néerlandais. Cette information ne quitte jamais ton appareil. En revanche, quand tu cliques vers Amazon, c'est Amazon qui dépose ses propres cookies, selon sa propre politique.</span><span class="lg-nl">Deze site plaatst geen reclamecookies en geen trackers. Ze onthoudt enkel, in je browser, of je Frans of Nederlands verkiest. Die informatie verlaat nooit je toestel. Klik je door naar Amazon, dan plaatst Amazon wél zijn eigen cookies, volgens zijn eigen beleid.</span></p>
+    <p><span class="lg-fr">Ce site ne dépose aucun cookie publicitaire. Il retient dans ton navigateur ta langue préférée et ton choix sur les cookies — ces deux informations ne quittent jamais ton appareil. Si tu acceptes la mesure d'audience, Google Analytics 4 dépose un cookie (durée maximale : 13 mois) et Google Ireland Ltd traite ces données pour mon compte ; elles peuvent être transférées aux États-Unis dans le cadre du Data Privacy Framework UE–USA. Si tu refuses, rien ne se charge — et le site fonctionne exactement pareil. Tu peux changer d'avis à tout moment via le lien « Cookies » en bas de page. Enfin, quand tu cliques vers Amazon, c'est Amazon qui dépose ses propres cookies, selon sa propre politique.</span><span class="lg-nl">Deze site plaatst geen reclamecookies. Ze onthoudt in je browser je taalkeuze en je cookiekeuze — die twee gegevens verlaten nooit je toestel. Aanvaard je de bezoekersmeting, dan plaatst Google Analytics 4 een cookie (maximaal 13 maanden) en verwerkt Google Ireland Ltd die gegevens voor mijn rekening; ze kunnen naar de VS worden doorgegeven onder het EU–VS Data Privacy Framework. Weiger je, dan wordt niets geladen — en de site werkt precies hetzelfde. Je kan op elk moment van mening veranderen via de link « Cookies » onderaan. Klik je door naar Amazon, dan plaatst Amazon wél zijn eigen cookies, volgens zijn eigen beleid.</span></p>
     <h4><span class="lg-fr">Tes droits</span><span class="lg-nl">Je rechten</span></h4>
     <p><span class="lg-fr">Tu peux demander l'accès à tes données, leur correction, leur effacement, la limitation de leur traitement, leur portabilité, et t'opposer à leur usage. Un seul e-mail suffit :</span><span class="lg-nl">Je kan inzage vragen in je gegevens, verbetering, wissing, beperking van de verwerking, overdraagbaarheid, en je verzetten tegen het gebruik ervan. Eén e-mail volstaat:</span> <a href="mailto:amrisimplybusiness@hotmail.com">amrisimplybusiness@hotmail.com</a></p>
     <h4><span class="lg-fr">Réclamation</span><span class="lg-nl">Klacht</span></h4>
@@ -843,8 +844,10 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   ovl.addEventListener('click', function(e){ if(e.target === ovl) close(); });
   ovl.querySelectorAll('.mclose').forEach(function(b){ b.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  if(location.hash === '#vie-privee'){ open('privacy'); }
 })();
 
 </script>
+<script defer src="/assets/consent.js"></script>
 </body>
 </html>
