@@ -314,9 +314,12 @@ table.cmp td{color:var(--ink-2)}
     try{ localStorage.setItem('amrisimply-lang', lang); }catch(e){}
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.lang); }); });
+  var url = null;
+  try{ url = new URLSearchParams(location.search).get('lang'); }catch(e){}
   var saved = null;
   try{ saved = localStorage.getItem('amrisimply-lang'); }catch(e){}
-  if(saved === 'nl' || saved === 'fr'){ set(saved); }
+  if(url === 'nl' || url === 'fr'){ set(url); }
+  else if(saved === 'nl' || saved === 'fr'){ set(saved); }
   else if((navigator.language||'').toLowerCase().indexOf('nl') === 0){ set('nl'); }
 })();
 </script>
@@ -336,6 +339,6 @@ table.cmp td{color:var(--ink-2)}
 }
 </script>
 
-<script defer src="/assets/consent.js"></script>
+<script defer src="/assets/consent-v2.js"></script>
 </body>
 </html>

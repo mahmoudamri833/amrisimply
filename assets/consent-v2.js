@@ -57,6 +57,13 @@
     if (gaCharge && window.gtag) {
       window.gtag('consent', 'update', { analytics_storage: 'denied' });
     }
+    /* Retrait du consentement : on supprime aussi les cookies deja poses.
+       GA les pose sur .amrisimply.com ; on tente les deux variantes. */
+    var noms = ['_ga', '_ga_' + ID.replace('G-', '')];
+    for (var i = 0; i < noms.length; i++) {
+      document.cookie = noms[i] + '=; Max-Age=0; path=/; domain=.amrisimply.com';
+      document.cookie = noms[i] + '=; Max-Age=0; path=/';
+    }
   }
 
   var banniere = null;
@@ -80,9 +87,8 @@
         '#amrisimply-consent .cbtns{display:flex;gap:10px;flex-wrap:wrap}' +
         '#amrisimply-consent button{font:inherit;font-weight:600;border-radius:8px;' +
         'padding:10px 18px;cursor:pointer;border:1px solid transparent}' +
-        '#amrisimply-consent .c-oui{background:#FF6152;color:#1B0704}' +
-        '#amrisimply-consent .c-non{background:transparent;color:#EDEFF3;' +
-        'border-color:rgba(154,163,178,.45)}';
+        '#amrisimply-consent .c-oui,#amrisimply-consent .c-non{background:transparent;' +
+        'color:#EDEFF3;border-color:rgba(154,163,178,.45)}';
       document.head.appendChild(st);
     }
     banniere = document.createElement('div');

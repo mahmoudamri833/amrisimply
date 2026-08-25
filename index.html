@@ -651,11 +651,14 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   <div class="band">
     <h2><span class="lg-fr">Une bonne affaire par semaine</span><span class="lg-nl">Eén goede deal per week</span></h2>
     <p><span class="lg-fr">Quand une des montres de cette page baisse vraiment de prix, tu reçois un mail. Pas deux par jour, pas de pub, désinscription en un clic.</span><span class="lg-nl">Zakt een van de horloges op deze pagina écht in prijs, dan krijg je een mail. Niet twee per dag, geen reclame, uitschrijven met één klik.</span></p>
-    <form class="form" onsubmit="return false">
+    <form class="form" name="alerte-prix" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="alerte-prix">
+      <p hidden aria-hidden="true"><label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <label for="mail-fr" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><span class="lg-fr">Adresse e-mail</span><span class="lg-nl">E-mailadres</span></label>
-      <input id="mail-fr" type="email" placeholder="ton@email.be" autocomplete="email">
+      <input id="mail-fr" name="email" type="email" required placeholder="ton@email.be" autocomplete="email">
       <button class="btn" type="submit"><span class="lg-fr">Je veux les bons plans</span><span class="lg-nl">Stuur mij de deals</span></button>
     </form>
+    <p class="form-retour" hidden></p>
   </div>
 </section>
 
@@ -776,7 +779,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
       <dt><span class="lg-fr">Durée de conservation</span><span class="lg-nl">Bewaartermijn</span></dt>
       <dd><span class="lg-fr">Jusqu'à ta désinscription, puis suppression sous 30 jours.</span><span class="lg-nl">Tot je uitschrijving, daarna verwijdering binnen 30 dagen.</span></dd>
       <dt><span class="lg-fr">Destinataires</span><span class="lg-nl">Ontvangers</span></dt>
-      <dd><span class="lg-fr">[à compléter avec le nom de l'outil d'e-mailing utilisé]. Aucune donnée n'est vendue ni échangée.</span><span class="lg-nl">[aan te vullen met de naam van de gebruikte e-mailtool]. Geen enkel gegeven wordt verkocht of geruild.</span></dd>
+      <dd><span class="lg-fr">Netlify, l’hébergeur du site, stocke l’adresse (formulaire sécurisé, consultable par moi seul). Aucune donnée n’est vendue ni échangée.</span><span class="lg-nl">Netlify, de host van deze site, bewaart het adres (beveiligd formulier, enkel door mij raadpleegbaar). Geen enkel gegeven wordt verkocht of geruild.</span></dd>
     </dl>
     <h4><span class="lg-fr">Cookies</span><span class="lg-nl">Cookies</span></h4>
     <p><span class="lg-fr">Ce site ne dépose aucun cookie publicitaire. Il retient dans ton navigateur ta langue préférée et ton choix sur les cookies — ces deux informations ne quittent jamais ton appareil. Si tu acceptes la mesure d'audience, Google Analytics 4 dépose un cookie (durée maximale : 13 mois) et Google Ireland Ltd traite ces données pour mon compte ; elles peuvent être transférées aux États-Unis dans le cadre du Data Privacy Framework UE–USA. Si tu refuses, rien ne se charge — et le site fonctionne exactement pareil. Tu peux changer d'avis à tout moment via le lien « Cookies » en bas de page. Enfin, quand tu cliques vers Amazon, c'est Amazon qui dépose ses propres cookies, selon sa propre politique.</span><span class="lg-nl">Deze site plaatst geen reclamecookies. Ze onthoudt in je browser je taalkeuze en je cookiekeuze — die twee gegevens verlaten nooit je toestel. Aanvaard je de bezoekersmeting, dan plaatst Google Analytics 4 een cookie (maximaal 13 maanden) en verwerkt Google Ireland Ltd die gegevens voor mijn rekening; ze kunnen naar de VS worden doorgegeven onder het EU–VS Data Privacy Framework. Weiger je, dan wordt niets geladen — en de site werkt precies hetzelfde. Je kan op elk moment van mening veranderen via de link « Cookies » onderaan. Klik je door naar Amazon, dan plaatst Amazon wél zijn eigen cookies, volgens zijn eigen beleid.</span></p>
@@ -817,9 +820,12 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
     try{ localStorage.setItem('amrisimply-lang', lang); }catch(e){}
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.lang); }); });
+  var url = null;
+  try{ url = new URLSearchParams(location.search).get('lang'); }catch(e){}
   var saved = null;
   try{ saved = localStorage.getItem('amrisimply-lang'); }catch(e){}
-  if(saved === 'nl' || saved === 'fr'){ set(saved); }
+  if(url === 'nl' || url === 'fr'){ set(url); }
+  else if(saved === 'nl' || saved === 'fr'){ set(saved); }
   else if((navigator.language||'').toLowerCase().indexOf('nl') === 0){ set('nl'); }
 })();
 (function(){
@@ -837,6 +843,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
     ovl.setAttribute('data-open','0');
     panels.forEach(function(pn){ pn.hidden = true; });
     document.body.style.overflow = '';
+    if(location.hash === '#vie-privee'){ history.replaceState(null, '', location.pathname + location.search); }
   }
   document.querySelectorAll('[data-modal]').forEach(function(a){
     a.addEventListener('click', function(e){ e.preventDefault(); open(a.dataset.modal); });
@@ -844,10 +851,36 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   ovl.addEventListener('click', function(e){ if(e.target === ovl) close(); });
   ovl.querySelectorAll('.mclose').forEach(function(b){ b.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-  if(location.hash === '#vie-privee'){ open('privacy'); }
+  function hashPrivee(){ if(location.hash === '#vie-privee'){ open('privacy'); } }
+  window.addEventListener('hashchange', hashPrivee);
+  hashPrivee();
+})();
+(function(){
+  var f = document.querySelector('form[name="alerte-prix"]');
+  if(!f) return;
+  var retour = document.querySelector('.form-retour');
+  function dire(fr, nl){
+    retour.innerHTML = '<span class="lg-fr">' + fr + '</span><span class="lg-nl">' + nl + '</span>';
+    retour.hidden = false;
+  }
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var corps = new URLSearchParams(new FormData(f)).toString();
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: corps })
+      .then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        f.style.display = 'none';   /* .form est en display:flex : l'attribut hidden ne suffit pas */
+        dire("C'est noté. Tu recevras un mail quand un prix bouge vraiment. Désinscription en un clic, promis.",
+             "Genoteerd. Je krijgt een mail wanneer een prijs écht beweegt. Uitschrijven met één klik, beloofd.");
+      })
+      .catch(function(){
+        dire("Ça n'a pas marché. Réessaie, ou écris-moi : amrisimplybusiness@hotmail.com.",
+             "Het is niet gelukt. Probeer opnieuw, of schrijf me: amrisimplybusiness@hotmail.com.");
+      });
+  });
 })();
 
 </script>
-<script defer src="/assets/consent.js"></script>
+<script defer src="/assets/consent-v2.js"></script>
 </body>
 </html>
