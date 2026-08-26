@@ -1,5 +1,13 @@
 name: Surveillance amrisimply.com
 
+# Filet de securite du revenu. Trois choses peuvent faire perdre de l'argent
+# sans qu'on s'en apercoive :
+#   1. une page qui tombe ou se vide (deploiement casse),
+#   2. un lien affilie qui perd son tag (clic non remunere),
+#   3. un produit retire d'Amazon (lien mort, visiteur perdu).
+# Les deux premiers se lisent dans le HTML du site. Le troisieme demande
+# d'aller frapper a la porte d'Amazon, ce que fait l'etape 2.
+
 on:
   schedule:
     - cron: '0 6 * * 1'   # tous les lundis 06:00 UTC (08:00 Bruxelles)
@@ -13,66 +21,173 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Verifier le site et les liens affilies
+      - name: Verifier les pages, les liens et les mentions
         run: |
           python3 - <<'PY'
-          import urllib.request, re, sys
+          import urllib.request, urllib.error, re, sys, json
 
-          URL = "https://amrisimply.com/"
+          BASE = "https://amrisimply.com"
           TAG = "amrisimply49-21"
-          ASINS = ["B0B639TSKY", "B01N45HWRM", "B07JGNC1C5",
-                   "B0BK11GP16", "B08CGQW8WD", "B0979HNLJJ"]
           DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases"
 
+          # Ce que chaque page doit contenir. Les ASIN sont ceux reellement
+          # presents dans le depot : si une page en perd un, on le saura.
+          PAGES = {
+              "/":                                  ["B0B639TSKY", "B01N45HWRM", "B07JGNC1C5",
+                                                     "B0BK11GP16", "B08CGQW8WD", "B0979HNLJJ"],
+              "/bambino-ou-kamasu/":                ["B01N45HWRM", "B07JGNC1C5"],
+              "/montre-automatique-moins-200-euros/": ["B0B639TSKY"],
+              "/montre-automatique-moins-500-euros/": ["B01N45HWRM", "B07JGNC1C5"],
+              "/automatique-ou-quartz/":            ["B01N45HWRM"],
+              "/methode/":                          [],
+          }
+
           problemes = []
-          req = urllib.request.Request(URL, headers={"User-Agent": "amrisimply-monitor"})
-          try:
+          asins_vus = set()
+
+          def charger(url):
+              req = urllib.request.Request(url, headers={"User-Agent": "amrisimply-monitor"})
               with urllib.request.urlopen(req, timeout=30) as r:
-                  code, html = r.getcode(), r.read().decode("utf-8", "replace")
-          except Exception as e:
-              print(f"::error::Site injoignable : {e}")
-              sys.exit(1)
+                  return r.getcode(), r.read().decode("utf-8", "replace")
 
-          print(f"HTTP {code} - {len(html)} octets")
-          if code != 200:
-              problemes.append(f"Le site repond HTTP {code} au lieu de 200.")
-          if len(html) < 20000:
-              problemes.append(f"Page anormalement courte ({len(html)} octets) - deploiement casse ?")
+          for chemin, asins in PAGES.items():
+              url = BASE + chemin
+              try:
+                  code, html = charger(url)
+              except Exception as e:
+                  problemes.append(f"{chemin} : page injoignable ({e})")
+                  continue
 
-          liens = re.findall(r'href="(https://www\.amazon\.com\.be/[^"]+)"', html)
-          print(f"{len(liens)} liens Amazon trouves")
+              print(f"{chemin:42s} HTTP {code} - {len(html):6d} octets")
+              if code != 200:
+                  problemes.append(f"{chemin} : repond HTTP {code} au lieu de 200.")
+              if len(html) < 15000:
+                  problemes.append(f"{chemin} : page anormalement courte ({len(html)} octets) - deploiement casse ?")
 
-          for asin in ASINS:
-              trouves = [l for l in liens if asin in l]
-              if not trouves:
-                  problemes.append(f"Lien produit disparu de la page : {asin}")
-              for l in trouves:
-                  if f"tag={TAG}" not in l:
-                      problemes.append(f"Tag affilie absent sur {asin} -> {l}")
+              liens = re.findall(r'href="(https://www\.amazon\.com\.be/[^"]+)"', html)
+              for asin in asins:
+                  trouves = [l for l in liens if asin in l]
+                  if not trouves:
+                      problemes.append(f"{chemin} : lien produit disparu ({asin}).")
+                  for l in trouves:
+                      asins_vus.add(asin)
+                      if f"tag={TAG}" not in l:
+                          problemes.append(f"{chemin} : tag affilie absent sur {asin} -> {l}")
 
-          if DISCLOSURE not in html:
-              problemes.append("Mention obligatoire Amazon Associates absente de la page.")
-          if "impact-site-verification" not in html:
-              problemes.append("Balise impact-site-verification absente (snippet Netlify supprime ?).")
+              # Mentions obligatoires : sur toutes les pages qui portent un lien.
+              if asins and DISCLOSURE not in html:
+                  problemes.append(f"{chemin} : mention obligatoire Amazon Associates absente.")
+
+              # Le consentement doit etre charge partout, sinon GA4 mesure
+              # sans consentement (ou ne mesure plus rien).
+              if "consent-v2.js" not in html:
+                  problemes.append(f"{chemin} : consent-v2.js absent - la banniere RGPD ne se charge pas.")
+
+              # Balise de verification injectee par l'hebergeur.
+              if chemin == "/" and "impact-site-verification" not in html:
+                  problemes.append("/ : balise impact-site-verification absente (snippet Netlify supprime ?).")
+
+          # Les fichiers annexes doivent repondre.
+          for chemin in ["/sitemap.xml", "/robots.txt", "/assets/consent-v2.js"]:
+              try:
+                  code, _ = charger(BASE + chemin)
+                  print(f"{chemin:42s} HTTP {code}")
+                  if code != 200:
+                      problemes.append(f"{chemin} : repond HTTP {code}.")
+              except Exception as e:
+                  problemes.append(f"{chemin} : injoignable ({e})")
+
+          json.dump(sorted(asins_vus), open("asins.json", "w"))
 
           if problemes:
-              rapport = "\n".join(f"- {p}" for p in problemes)
-              open("rapport.txt", "w", encoding="utf-8").write(rapport)
-              print("::error::Problemes detectes")
-              print(rapport)
+              open("rapport.txt", "w", encoding="utf-8").write("\n".join(f"- {p}" for p in problemes))
+              print("::error::Problemes detectes sur le site")
+              for p in problemes:
+                  print(" -", p)
               sys.exit(1)
 
-          print("OK : site en ligne, 6 liens produits presents, tag affilie et mentions en place.")
+          print(f"\nOK : {len(PAGES)} pages en ligne, {len(asins_vus)} produits lies, tags et mentions en place.")
+          PY
+
+      - name: Verifier que les produits existent toujours chez Amazon
+        id: amazon
+        continue-on-error: true      # Amazon peut bloquer un runner : jamais bloquant
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, json, time, pathlib, sys
+
+          # Un produit retire d'Amazon = lien mort = commission perdue, sans
+          # aucun signal cote site. On va donc verifier chaque fiche.
+          #
+          # Precaution importante : Amazon protege ses pages et peut repondre
+          # 503 / captcha a un serveur GitHub. Un 503 n'est PAS une preuve que
+          # le produit est mort. On n'alerte que sur un 404 franc, et on dit
+          # clairement combien de fiches n'ont pas pu etre lues.
+
+          asins = json.loads(pathlib.Path("asins.json").read_text()) if pathlib.Path("asins.json").exists() else []
+          morts, illisibles = [], []
+
+          for asin in asins:
+              url = f"https://www.amazon.com.be/dp/{asin}"
+              req = urllib.request.Request(url, headers={
+                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                "(KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+                  "Accept-Language": "fr-BE,fr;q=0.9,nl;q=0.8",
+              })
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      code = r.getcode()
+                      corps = r.read(200000).decode("utf-8", "replace")
+                  if "Page introuvable" in corps or "Page Not Found" in corps:
+                      morts.append(asin); etat = "INTROUVABLE"
+                  else:
+                      etat = "ok"
+              except urllib.error.HTTPError as e:
+                  if e.code == 404:
+                      morts.append(asin); etat = "404 INTROUVABLE"
+                  else:
+                      illisibles.append(asin); etat = f"illisible (HTTP {e.code})"
+              except Exception as e:
+                  illisibles.append(asin); etat = f"illisible ({type(e).__name__})"
+              print(f"{asin}  {etat}")
+              time.sleep(3)   # on reste poli avec Amazon
+
+          lignes = []
+          if morts:
+              lignes.append("Produits qui ne repondent plus chez Amazon (lien mort a remplacer) :")
+              lignes += [f"- {a} -> https://www.amazon.com.be/dp/{a}" for a in morts]
+          if illisibles:
+              lignes.append(f"({len(illisibles)} fiche(s) non lisibles depuis GitHub - protection Amazon, "
+                            "ce n'est pas une preuve de produit mort : {}.)".format(", ".join(illisibles)))
+          if lignes:
+              pathlib.Path("rapport-amazon.txt").write_text("\n".join(lignes), encoding="utf-8")
+
+          if morts:
+              print("::error::Produit(s) introuvable(s) chez Amazon")
+              sys.exit(1)
+          print("\nAucun produit mort detecte.")
           PY
 
       - name: Ouvrir une alerte si probleme
-        if: failure()
+        if: failure() || steps.amazon.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "La surveillance automatique de https://amrisimply.com a echoue le $(date -u '+%d/%m/%Y a %H:%M UTC')." > corps.md
+          echo "La surveillance automatique de https://amrisimply.com a signale un probleme le $(date -u '+%d/%m/%Y a %H:%M UTC')." > corps.md
           echo "" >> corps.md
-          if [ -f rapport.txt ]; then cat rapport.txt >> corps.md; else echo "- Site injoignable ou erreur reseau (voir le journal du run)." >> corps.md; fi
-          echo "" >> corps.md
+          if [ -f rapport.txt ]; then
+            echo "## Site" >> corps.md
+            cat rapport.txt >> corps.md
+            echo "" >> corps.md
+          fi
+          if [ -f rapport-amazon.txt ]; then
+            echo "## Produits Amazon" >> corps.md
+            cat rapport-amazon.txt >> corps.md
+            echo "" >> corps.md
+          fi
+          if [ ! -f rapport.txt ] && [ ! -f rapport-amazon.txt ]; then
+            echo "- Site injoignable ou erreur reseau (voir le journal du run)." >> corps.md
+            echo "" >> corps.md
+          fi
           echo "Journal complet : $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> corps.md
           gh issue create --repo "$GITHUB_REPOSITORY" --title "Alerte amrisimply.com - $(date -u '+%d/%m/%Y')" --body-file corps.md
