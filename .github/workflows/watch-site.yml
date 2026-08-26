@@ -38,7 +38,7 @@ jobs:
               "/bambino-ou-kamasu/":                ["B01N45HWRM", "B07JGNC1C5"],
               "/montre-automatique-moins-200-euros/": ["B0B639TSKY"],
               "/montre-automatique-moins-500-euros/": ["B01N45HWRM", "B07JGNC1C5"],
-              "/automatique-ou-quartz/":            [],
+              "/automatique-ou-quartz/":            ["B01N45HWRM"],
               "/methode/":                          [],
           }
 
