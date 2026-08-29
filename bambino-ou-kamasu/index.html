@@ -66,6 +66,27 @@ table.cmp td{color:var(--ink-2)}
 .flaws ul li{padding-left:22px;position:relative;margin-bottom:10px;color:var(--ink-2);line-height:1.6}
 .flaws ul li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--red);opacity:.85}
 .flaws ul li:last-child{margin-bottom:0}
+
+/* --- encadre En bref (ajoute 2026-08-29) --- */
+.enbref{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--red);border-radius:12px;padding:22px 26px;margin:6px 0 30px;max-width:70ch;box-shadow:var(--shadow)}
+.enbref .k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.enbref ul{list-style:none;margin:0 0 18px;padding:0}
+.enbref li{padding-left:22px;position:relative;margin-bottom:10px;color:var(--ink-2);font-size:16.5px;line-height:1.6}
+.enbref li:last-child{margin-bottom:0}
+.enbref li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--red);opacity:.85}
+.enbref li strong{color:var(--ink);font-weight:700}
+.enbref .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.enbref .afflabel{margin-top:9px}
+
+/* --- figures + signature (ajoute 2026-08-29) --- */
+.byline{font-size:14.5px;color:var(--ink-3);margin:14px 0 0}
+.byline a{color:var(--ink-2)}
+figure.fig{margin:30px 0;max-width:70ch}
+figure.fig svg{display:block;width:100%;height:auto;background:var(--surface);border:1px solid var(--rule);border-radius:12px}
+figure.fig figcaption{font-size:14px;color:var(--ink-3);margin-top:10px;line-height:1.55}
+.fig-t{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase}
+.midcta{margin:30px 0;max-width:70ch}
+.midcta .afflabel{margin-top:8px}
 </style>
 </head>
 <body>
@@ -97,7 +118,25 @@ table.cmp td{color:var(--ink-2)}
     <span class="lg-fr">Ce sont les deux Orient les plus conseillées pour une première automatique. Elles ne s'adressent pas au même poignet, ni à la même vie. Voici comment trancher en trois minutes.</span>
     <span class="lg-nl">Dit zijn de twee meest aanbevolen Orients voor een eerste automaat. Ze richten zich niet tot dezelfde pols, noch tot hetzelfde leven. Zo beslis je in drie minuten.</span>
   </p>
+
+  <p class="byline"><span class="lg-fr">Par Mahmoud Amri &mdash; ind&eacute;pendant &agrave; Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Comment je choisis les montres</a>, et ce que je ne peux pas savoir.</span><span class="lg-nl">Door Mahmoud Amri &mdash; zelfstandige in Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Hoe ik horloges kies</a>, en wat ik niet kan weten.</span></p>
 </header>
+
+<div class="enbref">
+  <span class="k"><span class="lg-fr">La r&eacute;ponse courte</span><span class="lg-nl">Het korte antwoord</span></span>
+  <ul>
+    <li><span class="lg-fr"><strong>Bambino = montre habill&eacute;e.</strong> Cadran bomb&eacute;, bracelet cuir, profil fin qui passe sous une manchette. Mais&nbsp;: verre min&eacute;ral et &eacute;tanch&eacute;it&eacute; 30&nbsp;m &mdash; ce qui veut dire <strong>pas d'eau du tout</strong>, douche comprise.</span><span class="lg-nl"><strong>Bambino = gekleed horloge.</strong> Gewelfde wijzerplaat, leren band, dun profiel dat onder een manchet past. Maar: mineraalglas en 30&nbsp;m &mdash; wat betekent <strong>helemaal geen water</strong>, douche inbegrepen.</span></li>
+    <li><span class="lg-fr"><strong>Kamasu = montre de tous les jours.</strong> Verre saphir, couronne viss&eacute;e, 200&nbsp;m, bracelet acier. Plus &eacute;paisse et plus lourde, mais elle encaisse tout.</span><span class="lg-nl"><strong>Kamasu = dagelijks horloge.</strong> Saffierglas, geschroefde kroon, 200&nbsp;m, stalen band. Dikker en zwaarder, maar ze incasseert alles.</span></li>
+    <li><span class="lg-fr"><strong>Si tu n'ach&egrave;tes qu'une seule montre&nbsp;: prends la Kamasu.</strong> Le saphir et la couronne viss&eacute;e sont les deux &eacute;quipements qui &eacute;vitent les vrais regrets &agrave; trois ans.</span><span class="lg-nl"><strong>Koop je maar &eacute;&eacute;n horloge: neem de Kamasu.</strong> Saffier en geschroefde kroon zijn de twee zaken die echte spijt na drie jaar voorkomen.</span></li>
+    <li><span class="lg-fr"><strong>Prends la Bambino</strong> si tu as d&eacute;j&agrave; une montre pour le quotidien et qu'il te manque une habill&eacute;e &mdash; ou si le style bomb&eacute; te pla&icirc;t vraiment. C'est un choix d'&oelig;il, pas un choix de fiche technique.</span><span class="lg-nl"><strong>Neem de Bambino</strong> als je al een dagelijks horloge hebt en een gekleed model mist &mdash; of als de gewelfde stijl je echt bevalt. Een keuze van het oog, niet van het datablad.</span></li>
+  </ul>
+  <div class="acts">
+    <a class="btn" href="https://www.amazon.com.be/dp/B07JGNC1C5?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir l'Orient Kamasu</span><span class="lg-nl">Bekijk de Orient Kamasu</span></a>
+    <a class="btn" href="https://www.amazon.com.be/dp/B01N45HWRM?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir l'Orient Bambino Ver. 2</span><span class="lg-nl">Bekijk de Orient Bambino Ver. 2</span></a>
+  </div>
+  <p class="afflabel"><span class="lg-fr">(liens r&eacute;mun&eacute;r&eacute;s &mdash; le prix ne change pas pour toi)</span><span class="lg-nl">(betaalde links &mdash; de prijs verandert niet voor jou)</span></p>
+</div>
+
 
 <section class="sec" style="border-top:none;padding-top:26px">
   <div class="prose">
@@ -116,6 +155,19 @@ table.cmp td{color:var(--ink-2)}
     </p>
   </div>
 </section>
+<figure class="fig">
+<svg viewBox="0 0 830 304" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Echelle d etancheite : ce que chaque mention autorise reellement">
+<text x="26" y="34" class="fig-t" fill="var(--ink-3)" letter-spacing="1.2"><tspan class="lg-fr">CE QUE L&#8217;&#201;TANCH&#201;IT&#201; AUTORISE VRAIMENT</tspan><tspan class="lg-nl">WAT DE WATERDICHTHEID ECHT TOELAAT</tspan></text>
+<line x1="26" y1="46" x2="804" y2="46" stroke="var(--rule)"/>
+<text x="26" y="67" class="fig-t" fill="var(--ink)" font-weight="700">30 m</text><text x="26" y="82" font-size="10.5" fill="var(--ink-3)">3 ATM</text><rect x="132" y="53" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="53" width="39" height="14" rx="7" fill="var(--red)"/><text x="448" y="65" font-size="13" fill="var(--ink-2)" class="lg-fr">La pluie, se laver les mains. Rien d'autre.</text><text x="448" y="65" font-size="13" fill="var(--ink-2)" class="lg-nl">Regen, handen wassen. Niets anders.</text>
+<text x="26" y="111" class="fig-t" fill="var(--ink)" font-weight="700">50 m</text><text x="26" y="126" font-size="10.5" fill="var(--ink-3)">5 ATM</text><rect x="132" y="97" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="97" width="84" height="14" rx="7" fill="#C98A24"/><text x="448" y="109" font-size="13" fill="var(--ink-2)" class="lg-fr">La douche &#224; la rigueur. Pas de nage.</text><text x="448" y="109" font-size="13" fill="var(--ink-2)" class="lg-nl">&#201;ventueel douchen. Niet zwemmen.</text>
+<text x="26" y="155" class="fig-t" fill="var(--ink)" font-weight="700">100 m</text><text x="26" y="170" font-size="10.5" fill="var(--ink-3)">10 ATM</text><rect x="132" y="141" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="141" width="165" height="14" rx="7" fill="var(--ok)"/><text x="448" y="153" font-size="13" fill="var(--ink-2)" class="lg-fr">Nager, se baigner en surface.</text><text x="448" y="153" font-size="13" fill="var(--ink-2)" class="lg-nl">Zwemmen, baden aan de oppervlakte.</text>
+<text x="26" y="199" class="fig-t" fill="var(--ink)" font-weight="700">200 m</text><text x="26" y="214" font-size="10.5" fill="var(--ink-3)">20 ATM</text><rect x="132" y="185" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="185" width="240" height="14" rx="7" fill="var(--ok)"/><text x="448" y="197" font-size="13" fill="var(--ink-2)" class="lg-fr">Nager, plonger en apn&#233;e, snorkeling.</text><text x="448" y="197" font-size="13" fill="var(--ink-2)" class="lg-nl">Zwemmen, vrijduiken, snorkelen.</text>
+<text x="26" y="243" class="fig-t" fill="var(--ink)" font-weight="700">300 m+</text><text x="26" y="258" font-size="10.5" fill="var(--ink-3)">30 ATM</text><rect x="132" y="229" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="229" width="300" height="14" rx="7" fill="var(--ok)"/><text x="448" y="241" font-size="13" fill="var(--ink-2)" class="lg-fr">Plong&#233;e bouteille.</text><text x="448" y="241" font-size="13" fill="var(--ink-2)" class="lg-nl">Duiken met flessen.</text>
+</svg>
+<figcaption><span class="lg-fr"><strong>Le chiffre le plus trompeur du secteur.</strong> Ces mentions viennent d'un test statique en laboratoire, montre immobile. Un mouvement de bras dans l'eau ou un jet de douche multiplient la pression instantan&eacute;e. Et l'&eacute;tanch&eacute;it&eacute; n'est pas &eacute;ternelle&nbsp;: elle repose sur des joints en caoutchouc qui durcissent avec les ann&eacute;es.</span><span class="lg-nl"><strong>Het meest misleidende cijfer van de sector.</strong> Deze vermeldingen komen uit een statische labotest, met stilstaand horloge. Een armbeweging in het water of een douchestraal vermenigvuldigt de momentane druk. En waterdichtheid is niet eeuwig: ze berust op rubberen dichtingen die met de jaren verharden.</span></figcaption>
+</figure>
+
 
 <section class="sec">
   <h2><span class="lg-fr">Le face-à-face</span><span class="lg-nl">De confrontatie</span></h2>
@@ -269,6 +321,11 @@ table.cmp td{color:var(--ink-2)}
       <span class="lg-nl">Ik heb deze twee horloges niet gedragen. Ik vergelijk technische fiches, lees geverifieerde reviews — 4.433 voor de Bambino, 1.302 voor de Kamasu — en controleer de echte beschikbaarheid op Amazon.com.be. Wat ik niet weet, zeg ik. <a href="/methode/">Mijn methode in detail</a>.</span>
     </p>
   </div>
+
+<div class="callout">
+<span class="k"><span class="lg-fr">Et si elle ne te va pas&nbsp;?</span><span class="lg-nl">En als hij je niet past?</span></span>
+<p><span class="lg-fr">Les deux sont vendues en ligne&nbsp;: tu disposes de <strong>14&nbsp;jours de r&eacute;tractation</strong> en achat &agrave; distance, sans avoir &agrave; te justifier. Porte-la deux jours, juge le poids et le diam&egrave;tre &agrave; ton poignet, renvoie si &ccedil;a ne va pas. C'est le seul test qui compte vraiment. S'ajoute la <strong>garantie l&eacute;gale belge de 2&nbsp;ans</strong> sur tout bien neuf vendu &agrave; un consommateur, quel que soit le prix.</span><span class="lg-nl">Beide worden online verkocht: je hebt <strong>14&nbsp;dagen herroepingsrecht</strong> bij aankoop op afstand, zonder motivering. Draag hem twee dagen, beoordeel gewicht en diameter aan je pols, stuur terug als het niet past. Dat is de enige test die echt telt. Daarbovenop geldt de <strong>Belgische wettelijke garantie van 2&nbsp;jaar</strong> op elk nieuw goed verkocht aan een consument, ongeacht de prijs.</span></p>
+</div>
 </section>
 
 </article>
@@ -292,7 +349,7 @@ table.cmp td{color:var(--ink-2)}
     <a href="/cookies/">Cookies</a> ·
     <a href="/contact/">Contact</a>
   </p>
-  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <a href="#" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></a></p>
+  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <button type="button" class="linklike" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></button></p>
 </footer>
 
 </div>
