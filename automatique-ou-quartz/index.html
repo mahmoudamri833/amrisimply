@@ -60,6 +60,27 @@ table.cmp td{color:var(--ink-2)}
 .endcta{text-align:center;padding:44px 0 8px}
 .endcta h2{margin-bottom:14px}
 .endcta p{max-width:56ch;margin-left:auto;margin-right:auto;color:var(--ink-2)}
+
+/* --- encadre En bref (ajoute 2026-08-29) --- */
+.enbref{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--red);border-radius:12px;padding:22px 26px;margin:6px 0 30px;max-width:70ch;box-shadow:var(--shadow)}
+.enbref .k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.enbref ul{list-style:none;margin:0 0 18px;padding:0}
+.enbref li{padding-left:22px;position:relative;margin-bottom:10px;color:var(--ink-2);font-size:16.5px;line-height:1.6}
+.enbref li:last-child{margin-bottom:0}
+.enbref li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--red);opacity:.85}
+.enbref li strong{color:var(--ink);font-weight:700}
+.enbref .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.enbref .afflabel{margin-top:9px}
+
+/* --- figures + signature (ajoute 2026-08-29) --- */
+.byline{font-size:14.5px;color:var(--ink-3);margin:14px 0 0}
+.byline a{color:var(--ink-2)}
+figure.fig{margin:30px 0;max-width:70ch}
+figure.fig svg{display:block;width:100%;height:auto;background:var(--surface);border:1px solid var(--rule);border-radius:12px}
+figure.fig figcaption{font-size:14px;color:var(--ink-3);margin-top:10px;line-height:1.55}
+.fig-t{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase}
+.midcta{margin:30px 0;max-width:70ch}
+.midcta .afflabel{margin-top:8px}
 </style>
 </head>
 <body>
@@ -91,7 +112,24 @@ table.cmp td{color:var(--ink-2)}
     <span class="lg-fr">Les deux sont de bonnes montres. Elles ne répondent simplement pas à la même question. Voici ce qui les sépare vraiment — y compris ce qui dérange dans l'automatique.</span>
     <span class="lg-nl">Beide zijn goede horloges. Ze beantwoorden alleen niet dezelfde vraag. Dit is wat hen écht scheidt — inclusief wat stoort aan een automaat.</span>
   </p>
+
+  <p class="byline"><span class="lg-fr">Par Mahmoud Amri &mdash; ind&eacute;pendant &agrave; Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Comment je choisis les montres</a>, et ce que je ne peux pas savoir.</span><span class="lg-nl">Door Mahmoud Amri &mdash; zelfstandige in Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Hoe ik horloges kies</a>, en wat ik niet kan weten.</span></p>
 </header>
+
+<div class="enbref">
+  <span class="k"><span class="lg-fr">La r&eacute;ponse courte</span><span class="lg-nl">Het korte antwoord</span></span>
+  <ul>
+    <li><span class="lg-fr"><strong>Le quartz gagne sur les chiffres.</strong> Environ 15&nbsp;secondes de d&eacute;rive par mois, une pile tous les 2 &agrave; 3&nbsp;ans, aucun entretien, et moins cher &agrave; qualit&eacute; &eacute;gale.</span><span class="lg-nl"><strong>Quarts wint op de cijfers.</strong> Ongeveer 15&nbsp;seconden afwijking per maand, een batterij om de 2 &agrave; 3&nbsp;jaar, geen onderhoud, en goedkoper bij gelijke kwaliteit.</span></li>
+    <li><span class="lg-fr"><strong>L'automatique perd sur les chiffres et gagne sur le reste.</strong> Compte 15 &agrave; 25&nbsp;secondes de d&eacute;rive <em>par jour</em> en entr&eacute;e de gamme, un arr&ecirc;t si tu la poses deux jours, et une r&eacute;vision tous les 5 &agrave; 10&nbsp;ans.</span><span class="lg-nl"><strong>Automatisch verliest op de cijfers en wint op de rest.</strong> Reken op 15 tot 25&nbsp;seconden afwijking <em>per dag</em> bij instapmodellen, stilstand als je hem twee dagen weglegt, en een revisie om de 5 &agrave; 10&nbsp;jaar.</span></li>
+    <li><span class="lg-fr"><strong>Le crit&egrave;re de d&eacute;cision&nbsp;:</strong> si tu veux l'heure juste sans y penser, prends une quartz &mdash; et n'&eacute;coute personne. Si tu veux un objet m&eacute;canique qui vit &agrave; ton poignet et se transmet, prends une automatique en connaissant ses d&eacute;fauts.</span><span class="lg-nl"><strong>Het beslissingscriterium:</strong> wil je de juiste tijd zonder eraan te denken, neem dan quarts &mdash; en luister naar niemand. Wil je een mechanisch object dat leeft aan je pols, neem dan automatisch, met kennis van de gebreken.</span></li>
+    <li><span class="lg-fr"><strong>Si tu choisis l'automatique</strong>, la premi&egrave;re la plus s&ucirc;re reste l'Orient Bambino Ver.&nbsp;2&nbsp;: mouvement maison, marque japonaise &eacute;tablie, et un prix qui ne punit pas l'erreur.</span><span class="lg-nl"><strong>Kies je automatisch</strong>, dan blijft de veiligste eerste de Orient Bambino Ver.&nbsp;2: eigen uurwerk, gevestigd Japans merk, en een prijs die een vergissing niet afstraft.</span></li>
+  </ul>
+  <div class="acts">
+    <a class="btn" href="https://www.amazon.com.be/dp/B01N45HWRM?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir l'Orient Bambino Ver. 2</span><span class="lg-nl">Bekijk de Orient Bambino Ver. 2</span></a>
+  </div>
+  <p class="afflabel"><span class="lg-fr">(liens r&eacute;mun&eacute;r&eacute;s &mdash; le prix ne change pas pour toi)</span><span class="lg-nl">(betaalde links &mdash; de prijs verandert niet voor jou)</span></p>
+</div>
+
 
 <section class="sec" style="border-top:none;padding-top:26px">
   <div class="prose">
@@ -110,6 +148,18 @@ table.cmp td{color:var(--ink-2)}
     </p>
   </div>
 </section>
+<figure class="fig">
+<svg viewBox="0 0 830 250" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Derive accumulee sur un an : quartz environ 3 minutes, automatique environ 2 heures">
+<text x="26" y="34" class="fig-t" fill="var(--ink-3)" letter-spacing="1.2"><tspan class="lg-fr">D&#201;RIVE ACCUMUL&#201;E SUR UN AN, SANS R&#201;GLAGE</tspan><tspan class="lg-nl">AFWIJKING OPGEBOUWD OVER EEN JAAR, ZONDER BIJSTELLEN</tspan></text><line x1="26" y1="46" x2="804" y2="46" stroke="var(--rule)"/><text x="26" y="92" font-size="14" fill="var(--ink)" font-weight="700">Quartz</text><text x="26" y="110" font-size="11" fill="var(--ink-3)">~15 s / <tspan class="lg-fr">mois</tspan><tspan class="lg-nl">maand</tspan></text><rect x="132" y="76" width="672" height="20" rx="10" fill="var(--rule)" opacity=".5"/><rect x="132" y="76" width="17" height="20" rx="10" fill="var(--ok)"/><text x="162" y="91" font-size="14" fill="var(--ok)" font-weight="700"><tspan class="lg-fr">environ 3 minutes</tspan><tspan class="lg-nl">ongeveer 3 minuten</tspan></text><text x="26" y="160" font-size="14" fill="var(--ink)" font-weight="700"><tspan class="lg-fr">Automatique</tspan><tspan class="lg-nl">Automatisch</tspan></text><text x="26" y="178" font-size="11" fill="var(--ink-3)">~20 s / <tspan class="lg-fr">jour</tspan><tspan class="lg-nl">dag</tspan></text><rect x="132" y="144" width="672" height="20" rx="10" fill="var(--rule)" opacity=".5"/><rect x="132" y="144" width="672" height="20" rx="10" fill="var(--red)"/><text x="152" y="159" font-size="14" fill="var(--on-red)" font-weight="700"><tspan class="lg-fr">environ 2 heures</tspan><tspan class="lg-nl">ongeveer 2 uur</tspan></text><text x="132" y="212" font-size="13" fill="var(--ink-2)"><tspan class="lg-fr">Soit un rapport d'environ 40 fois, en faveur du quartz.</tspan><tspan class="lg-nl">Een verhouding van ongeveer 40 keer, in het voordeel van quarts.</tspan></text></svg>
+<figcaption><span class="lg-fr"><strong>Calcul&nbsp;:</strong> 15&nbsp;s par mois &times;&nbsp;12 = 180&nbsp;s, soit 3&nbsp;minutes par an. 20&nbsp;s par jour &times;&nbsp;365 = 7&nbsp;300&nbsp;s, soit 2&nbsp;h&nbsp;02 par an. Les 20&nbsp;s/jour correspondent au milieu de la fourchette 15&ndash;25&nbsp;s/jour couramment observ&eacute;e sur les automatiques d'entr&eacute;e de gamme. En pratique, on remet une automatique &agrave; l'heure toutes les deux ou trois semaines&nbsp;: la question n'est pas la pr&eacute;cision, c'est de savoir si ce geste te d&eacute;range.</span><span class="lg-nl"><strong>Berekening:</strong> 15&nbsp;s per maand &times;&nbsp;12 = 180&nbsp;s, oftewel 3&nbsp;minuten per jaar. 20&nbsp;s per dag &times;&nbsp;365 = 7&nbsp;300&nbsp;s, oftewel 2&nbsp;u&nbsp;02 per jaar. De 20&nbsp;s/dag is het midden van de gangbare vork van 15&ndash;25&nbsp;s/dag bij instapautomaten. In de praktijk zet je een automaat om de twee of drie weken gelijk: de vraag is niet de precisie, maar of dat gebaar je stoort.</span></figcaption>
+</figure>
+
+<div class="midcta">
+<p style="font-size:16px;color:var(--ink-2);margin-bottom:14px"><span class="lg-fr">Si tu as tranch&eacute; pour l'automatique, voici celle par laquelle commencer&nbsp;:</span><span class="lg-nl">Heb je voor automatisch gekozen, dan is dit het model om mee te beginnen:</span></p>
+<a class="btn" href="https://www.amazon.com.be/dp/B01N45HWRM?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir l'Orient Bambino Ver. 2</span><span class="lg-nl">Bekijk de Orient Bambino Ver. 2</span></a>
+<p class="afflabel"><span class="lg-fr">(lien r&eacute;mun&eacute;r&eacute;)</span><span class="lg-nl">(betaalde link)</span></p>
+</div>
+
 
 <section class="sec">
   <h2><span class="lg-fr">Le tableau honnête</span><span class="lg-nl">De eerlijke tabel</span></h2>
@@ -313,7 +363,7 @@ table.cmp td{color:var(--ink-2)}
     <a href="/cookies/">Cookies</a> ·
     <a href="/contact/">Contact</a>
   </p>
-  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <a href="#" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></a></p>
+  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <button type="button" class="linklike" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></button></p>
 </footer>
 
 </div>
