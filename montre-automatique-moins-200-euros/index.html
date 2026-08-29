@@ -60,6 +60,27 @@ table.cmp td{color:var(--ink-2)}
 .checks li{padding-left:34px;position:relative;margin-bottom:13px;color:var(--ink-2);font-size:16.5px;line-height:1.6}
 .checks li::before{content:attr(data-n);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:6px;background:var(--red);color:var(--on-red);font-family:"JetBrains Mono",monospace;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:500}
 .checks li strong{color:var(--ink)}
+
+/* --- encadre En bref (ajoute 2026-08-29) --- */
+.enbref{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--red);border-radius:12px;padding:22px 26px;margin:6px 0 30px;max-width:70ch;box-shadow:var(--shadow)}
+.enbref .k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.enbref ul{list-style:none;margin:0 0 18px;padding:0}
+.enbref li{padding-left:22px;position:relative;margin-bottom:10px;color:var(--ink-2);font-size:16.5px;line-height:1.6}
+.enbref li:last-child{margin-bottom:0}
+.enbref li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--red);opacity:.85}
+.enbref li strong{color:var(--ink);font-weight:700}
+.enbref .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.enbref .afflabel{margin-top:9px}
+
+/* --- figures + signature (ajoute 2026-08-29) --- */
+.byline{font-size:14.5px;color:var(--ink-3);margin:14px 0 0}
+.byline a{color:var(--ink-2)}
+figure.fig{margin:30px 0;max-width:70ch}
+figure.fig svg{display:block;width:100%;height:auto;background:var(--surface);border:1px solid var(--rule);border-radius:12px}
+figure.fig figcaption{font-size:14px;color:var(--ink-3);margin-top:10px;line-height:1.55}
+.fig-t{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase}
+.midcta{margin:30px 0;max-width:70ch}
+.midcta .afflabel{margin-top:8px}
 </style>
 </head>
 <body>
@@ -91,7 +112,24 @@ table.cmp td{color:var(--ink-2)}
     <span class="lg-fr">Oui, on trouve de la vraie mécanique sous 200 €. Mais il faut savoir ce qu'on abandonne, et surtout ce qu'il ne faut jamais accepter. Guide pour la Belgique.</span>
     <span class="lg-nl">Ja, je vindt echte mechaniek onder 200 €. Maar je moet weten wat je opgeeft, en vooral wat je nooit mag aanvaarden. Gids voor België.</span>
   </p>
+
+  <p class="byline"><span class="lg-fr">Par Mahmoud Amri &mdash; ind&eacute;pendant &agrave; Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Comment je choisis les montres</a>, et ce que je ne peux pas savoir.</span><span class="lg-nl">Door Mahmoud Amri &mdash; zelfstandige in Fontaine-l'&Eacute;v&ecirc;que (BE). <a href="/methode/">Hoe ik horloges kies</a>, en wat ik niet kan weten.</span></p>
 </header>
+
+<div class="enbref">
+  <span class="k"><span class="lg-fr">En bref</span><span class="lg-nl">In het kort</span></span>
+  <ul>
+    <li><span class="lg-fr"><strong>Oui, on trouve de la vraie m&eacute;canique sous 200 &euro;</strong> &mdash; &agrave; une condition&nbsp;: que la fiche <strong>nomme le calibre</strong> (Seiko NH35/NH34, Miyota 8215, calibre Orient). Sans nom, c'est un mouvement g&eacute;n&eacute;rique irr&eacute;parable.</span><span class="lg-nl"><strong>Ja, je vindt echte mechaniek onder 200 &euro;</strong> &mdash; op &eacute;&eacute;n voorwaarde: dat de fiche <strong>het kaliber benoemt</strong> (Seiko NH35/NH34, Miyota 8215, Orient-kaliber). Zonder naam is het een generiek, onherstelbaar uurwerk.</span></li>
+    <li><span class="lg-fr">&Agrave; ce budget, l'argent va dans la <strong>m&eacute;canique et le verre</strong>. Il ne va ni dans la finition ni dans le bracelet &mdash; pr&eacute;vois de changer ce dernier.</span><span class="lg-nl">Bij dit budget gaat het geld naar <strong>mechaniek en glas</strong>. Niet naar afwerking of band &mdash; reken op vervanging van die laatste.</span></li>
+    <li><span class="lg-fr"><strong>Mon choix dans cette tranche&nbsp;: le Pagani Design PD-1662 GMT.</strong> Verre saphir, mouvement Seiko NH34 nomm&eacute;, 100&nbsp;m d'&eacute;tanch&eacute;it&eacute;. C'est un hommage assum&eacute; &agrave; la GMT-Master&nbsp;: tu dois le savoir avant d'acheter.</span><span class="lg-nl"><strong>Mijn keuze in deze klasse: de Pagani Design PD-1662 GMT.</strong> Saffierglas, benoemd Seiko NH34-uurwerk, 100&nbsp;m waterdicht. Het is een bewuste hommage aan de GMT-Master: dat moet je vooraf weten.</span></li>
+    <li><span class="lg-fr">Si tu peux attendre et monter &agrave; 250&ndash;300&nbsp;&euro;, la marche est nette&nbsp;: marque japonaise historique, finition s&eacute;rieuse, service apr&egrave;s-vente r&eacute;el.</span><span class="lg-nl">Kun je wachten en naar 250&ndash;300&nbsp;&euro; gaan, dan is de sprong duidelijk: historisch Japans merk, serieuze afwerking, echte klantendienst.</span></li>
+  </ul>
+  <div class="acts">
+    <a class="btn" href="https://www.amazon.com.be/dp/B0B639TSKY?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir le Pagani PD-1662 GMT</span><span class="lg-nl">Bekijk de Pagani PD-1662 GMT</span></a>
+  </div>
+  <p class="afflabel"><span class="lg-fr">(liens r&eacute;mun&eacute;r&eacute;s &mdash; le prix ne change pas pour toi)</span><span class="lg-nl">(betaalde links &mdash; de prijs verandert niet voor jou)</span></p>
+</div>
+
 
 <section class="sec" style="border-top:none;padding-top:26px">
   <div class="prose">
@@ -106,6 +144,25 @@ table.cmp td{color:var(--ink-2)}
     </p>
   </div>
 </section>
+<figure class="fig">
+<svg viewBox="0 0 830 304" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Echelle d etancheite : ce que chaque mention autorise reellement">
+<text x="26" y="34" class="fig-t" fill="var(--ink-3)" letter-spacing="1.2"><tspan class="lg-fr">CE QUE L&#8217;&#201;TANCH&#201;IT&#201; AUTORISE VRAIMENT</tspan><tspan class="lg-nl">WAT DE WATERDICHTHEID ECHT TOELAAT</tspan></text>
+<line x1="26" y1="46" x2="804" y2="46" stroke="var(--rule)"/>
+<text x="26" y="67" class="fig-t" fill="var(--ink)" font-weight="700">30 m</text><text x="26" y="82" font-size="10.5" fill="var(--ink-3)">3 ATM</text><rect x="132" y="53" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="53" width="39" height="14" rx="7" fill="var(--red)"/><text x="448" y="65" font-size="13" fill="var(--ink-2)" class="lg-fr">La pluie, se laver les mains. Rien d'autre.</text><text x="448" y="65" font-size="13" fill="var(--ink-2)" class="lg-nl">Regen, handen wassen. Niets anders.</text>
+<text x="26" y="111" class="fig-t" fill="var(--ink)" font-weight="700">50 m</text><text x="26" y="126" font-size="10.5" fill="var(--ink-3)">5 ATM</text><rect x="132" y="97" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="97" width="84" height="14" rx="7" fill="#C98A24"/><text x="448" y="109" font-size="13" fill="var(--ink-2)" class="lg-fr">La douche &#224; la rigueur. Pas de nage.</text><text x="448" y="109" font-size="13" fill="var(--ink-2)" class="lg-nl">&#201;ventueel douchen. Niet zwemmen.</text>
+<text x="26" y="155" class="fig-t" fill="var(--ink)" font-weight="700">100 m</text><text x="26" y="170" font-size="10.5" fill="var(--ink-3)">10 ATM</text><rect x="132" y="141" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="141" width="165" height="14" rx="7" fill="var(--ok)"/><text x="448" y="153" font-size="13" fill="var(--ink-2)" class="lg-fr">Nager, se baigner en surface.</text><text x="448" y="153" font-size="13" fill="var(--ink-2)" class="lg-nl">Zwemmen, baden aan de oppervlakte.</text>
+<text x="26" y="199" class="fig-t" fill="var(--ink)" font-weight="700">200 m</text><text x="26" y="214" font-size="10.5" fill="var(--ink-3)">20 ATM</text><rect x="132" y="185" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="185" width="240" height="14" rx="7" fill="var(--ok)"/><text x="448" y="197" font-size="13" fill="var(--ink-2)" class="lg-fr">Nager, plonger en apn&#233;e, snorkeling.</text><text x="448" y="197" font-size="13" fill="var(--ink-2)" class="lg-nl">Zwemmen, vrijduiken, snorkelen.</text>
+<text x="26" y="243" class="fig-t" fill="var(--ink)" font-weight="700">300 m+</text><text x="26" y="258" font-size="10.5" fill="var(--ink-3)">30 ATM</text><rect x="132" y="229" width="300" height="14" rx="7" fill="var(--rule)" opacity=".5"/><rect x="132" y="229" width="300" height="14" rx="7" fill="var(--ok)"/><text x="448" y="241" font-size="13" fill="var(--ink-2)" class="lg-fr">Plong&#233;e bouteille.</text><text x="448" y="241" font-size="13" fill="var(--ink-2)" class="lg-nl">Duiken met flessen.</text>
+</svg>
+<figcaption><span class="lg-fr"><strong>Le chiffre le plus trompeur du secteur.</strong> Ces mentions viennent d'un test statique en laboratoire, montre immobile. Un mouvement de bras dans l'eau ou un jet de douche multiplient la pression instantan&eacute;e. Et l'&eacute;tanch&eacute;it&eacute; n'est pas &eacute;ternelle&nbsp;: elle repose sur des joints en caoutchouc qui durcissent avec les ann&eacute;es.</span><span class="lg-nl"><strong>Het meest misleidende cijfer van de sector.</strong> Deze vermeldingen komen uit een statische labotest, met stilstaand horloge. Een armbeweging in het water of een douchestraal vermenigvuldigt de momentane druk. En waterdichtheid is niet eeuwig: ze berust op rubberen dichtingen die met de jaren verharden.</span></figcaption>
+</figure>
+
+<div class="midcta">
+<p style="font-size:16px;color:var(--ink-2);margin-bottom:14px"><span class="lg-fr">Si ces quatre refus sont respect&eacute;s, il reste peu de mod&egrave;les sous 200&nbsp;&euro;. Celui que je retiens coche saphir, calibre nomm&eacute; et 100&nbsp;m&nbsp;:</span><span class="lg-nl">Als deze vier weigeringen gerespecteerd zijn, blijven er weinig modellen onder 200&nbsp;&euro;. Het model dat ik weerhoud vinkt saffier, benoemd kaliber en 100&nbsp;m aan:</span></p>
+<a class="btn" href="https://www.amazon.com.be/dp/B0B639TSKY?tag=amrisimply49-21" rel="sponsored nofollow noopener" target="_blank"><span class="lg-fr">Voir le Pagani PD-1662 GMT</span><span class="lg-nl">Bekijk de Pagani PD-1662 GMT</span></a>
+<p class="afflabel"><span class="lg-fr">(lien r&eacute;mun&eacute;r&eacute;)</span><span class="lg-nl">(betaalde link)</span></p>
+</div>
+
 
 <section class="sec">
   <h2><span class="lg-fr">Ce que 200 € achète, et ce qu'ils n'achètent pas</span><span class="lg-nl">Wat 200 € koopt, en wat niet</span></h2>
@@ -232,7 +289,7 @@ table.cmp td{color:var(--ink-2)}
     <a href="/cookies/">Cookies</a> ·
     <a href="/contact/">Contact</a>
   </p>
-  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <a href="#" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></a></p>
+  <p class="fine">© 2026 amrisimply · Fontaine-l'Évêque, BE · BCE 1041.002.614 · <button type="button" class="linklike" data-cookies><span class="lg-fr">Revoir mon choix</span><span class="lg-nl">Mijn keuze herzien</span></button></p>
 </footer>
 
 </div>
