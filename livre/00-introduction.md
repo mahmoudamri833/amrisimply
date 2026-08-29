@@ -29,7 +29,7 @@ Je m'appelle Mahmoud Amri. Je suis indépendant en Belgique, à Fontaine-l'Évê
 
 Voici la vérité sur ma méthode, parce que tu dois la connaître avant de me faire confiance.
 
-J'ai voulu acheter une première montre automatique. J'ai passé des semaines à lire des fiches techniques, à trier des milliers d'avis d'acheteurs réels, à recouper des spécifications contradictoires et à comprendre pourquoi deux montres qui se ressemblent coûtent le simple et le double. Ce travail de tri, personne ne l'avait fait pour un acheteur belge — avec nos prix, nos délais de livraison, notre garantie légale.
+J'ai voulu acheter une première montre automatique, et je me suis heurté au même mur que toi. Alors j'ai fait le travail que je cherchais : lire les fiches techniques, recouper les spécifications qui se contredisent, éplucher les avis d'acheteurs — surtout les mauvais — et comprendre pourquoi deux montres qui se ressemblent coûtent le simple et le double. Le tout avec les contraintes d'ici : nos prix, nos délais de livraison, notre garantie légale.
 
 Alors je l'ai écrit.
 
