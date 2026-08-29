@@ -138,3 +138,45 @@
     init();
   }
 })();
+
+/* ------------------------------------------------------------------
+   Suivi des clics sortants vers Amazon — ajoute le 29/08/2026.
+
+   Pourquoi : le taux de clic sortant est LE chiffre qui decide si la
+   publicite payante est rentable. Sans lui, on ne peut que deviner.
+   Avec 14 % de commission sur les montres, il faut environ 15 a 18 %
+   de clics sortants pour qu'un clic paye a 0,40 € soit rentable.
+
+   Ce bloc est autonome : il ne touche a rien d'autre dans ce fichier.
+   Il n'envoie rien tant que le consentement analytics n'est pas donne
+   (gtag ignore les evenements en mode denied).
+------------------------------------------------------------------ */
+(function () {
+  'use strict';
+  function poser() {
+    var liens = document.querySelectorAll('a[href*="amazon."]');
+    for (var i = 0; i < liens.length; i++) {
+      (function (a) {
+        if (a.getAttribute('data-suivi-pose')) return;
+        a.setAttribute('data-suivi-pose', '1');
+        a.addEventListener('click', function () {
+          if (!window.gtag) return;
+          var carte = a.closest('article, .card, section');
+          var titre = carte ? (carte.querySelector('h2, h3, .ctitle') || {}).textContent : null;
+          try {
+            window.gtag('event', 'clic_amazon', {
+              produit: (titre || a.textContent || '').trim().slice(0, 80),
+              page: location.pathname,
+              lien: a.href.split('?')[0]
+            });
+          } catch (e) {}
+        }, { passive: true });
+      })(liens[i]);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', poser);
+  } else {
+    poser();
+  }
+})();
