@@ -40,7 +40,15 @@ jobs:
               "/montre-automatique-moins-500-euros/": ["B01N45HWRM", "B07JGNC1C5"],
               "/automatique-ou-quartz/":            ["B01N45HWRM"],
               "/methode/":                          [],
+              "/mentions-legales/":                  [],
+              "/vie-privee/":                        [],
+              "/cookies/":                           [],
+              "/contact/":                           [],
           }
+
+          # Les pages legales sont courtes par nature : seuil reduit pour elles,
+          # sinon chaque lundi crierait au deploiement casse.
+          PAGES_COURTES = {"/mentions-legales/", "/vie-privee/", "/cookies/", "/contact/"}
 
           problemes = []
           asins_vus = set()
@@ -61,7 +69,8 @@ jobs:
               print(f"{chemin:42s} HTTP {code} - {len(html):6d} octets")
               if code != 200:
                   problemes.append(f"{chemin} : repond HTTP {code} au lieu de 200.")
-              if len(html) < 15000:
+              seuil = 4000 if chemin in PAGES_COURTES else 15000
+              if len(html) < seuil:
                   problemes.append(f"{chemin} : page anormalement courte ({len(html)} octets) - deploiement casse ?")
 
               liens = re.findall(r'href="(https://www\.amazon\.com\.be/[^"]+)"', html)
