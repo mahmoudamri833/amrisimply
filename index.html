@@ -136,6 +136,13 @@ a{color:inherit}
 }
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .langs button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.shoplink{
+  font-family:Figtree,sans-serif;font-size:14.5px;font-weight:700;white-space:nowrap;
+  color:var(--red);text-decoration:none;border:1px solid var(--red);
+  border-radius:7px;padding:7px 14px;transition:background .15s,color .15s;
+}
+.shoplink:hover{background:var(--red);color:var(--on-red)}
+.shoplink:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 /* buttons */
 .btn{
@@ -319,6 +326,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
 <div class="topbar">
   <div class="in">
     <div class="brand">amri<span>simply</span></div>
+    <a class="shoplink" href="https://cn0zpp-by.myshopify.com"><span class="lg-fr">Boutique</span><span class="lg-nl">Winkel</span></a>
     <div class="langs" role="group" aria-label="Langue / Taal">
       <button type="button" data-lang="fr" aria-pressed="true">FR</button>
       <button type="button" data-lang="nl" aria-pressed="false">NL</button>
@@ -719,6 +727,7 @@ footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:14.5px;col
   </div>
   <div class="fnav">
     <strong style="font-family:Anton,sans-serif;font-size:19px;text-transform:lowercase;letter-spacing:.02em">amri<span style="color:var(--red)">simply</span></strong>
+    <a href="https://cn0zpp-by.myshopify.com"><span class="lg-fr">Boutique</span><span class="lg-nl">Winkel</span></a>
     <a href="/mentions-legales/"><span class="lg-fr">Mentions légales</span><span class="lg-nl">Juridische info</span></a>
     <a href="/vie-privee/"><span class="lg-fr">Vie privée</span><span class="lg-nl">Privacy</span></a>
     <a href="/cookies/">Cookies</a>
